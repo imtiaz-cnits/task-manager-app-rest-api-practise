@@ -10,7 +10,18 @@ exports.registration = async (req, res) => {
   }
 };
 
-exports.login = (req, res) => {};
+exports.login = async (req, res) => {
+  try {
+    let reqBody = req.body;
+    let user = await UsersModel.find(reqBody);
+    if (user.length > 0) {
+    } else {
+      res.json({ status: "fail", message: "No user found" });
+    }
+  } catch (err) {
+    res.json({ status: "fail", message: err });
+  }
+};
 
 exports.profileUpdate = (req, res) => {};
 
