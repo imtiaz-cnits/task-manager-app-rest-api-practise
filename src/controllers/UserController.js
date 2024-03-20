@@ -1,4 +1,5 @@
 const UsersModel = require("../models/UsersModel");
+const jwt = require('jsonwebtoken');
 
 exports.registration = async (req, res) => {
   try {
@@ -14,10 +15,14 @@ exports.login = async (req, res) => {
   try {
     let reqBody = req.body;
     let user = await UsersModel.find(reqBody);
+
     if (user.length > 0) {
-    } else {
+
+    }
+    else {
       res.json({ status: "fail", message: "No user found" });
     }
+
   } catch (err) {
     res.json({ status: "fail", message: err });
   }
@@ -32,3 +37,6 @@ exports.verifyEmail = (req, res) => {};
 exports.verifyOTP = (req, res) => {};
 
 exports.passwordReset = (req, res) => {};
+
+
+(())()
