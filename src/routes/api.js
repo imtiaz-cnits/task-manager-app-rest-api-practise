@@ -1,10 +1,14 @@
 const express = require("express");
 const UserController = require("../controllers/UserController");
+const AuthMiddleware = require("../middlewares/AuthMiddleware");
 
 const router = express.Router();
 
 router.post("/registration", UserController.registration);
 router.post("/login", UserController.login);
+router.get("/profileDetails",AuthMiddleware , UserController.profileDetails);
+
+
 router.post("/profileUpdate", UserController.profileUpdate);
 router.get("/RecoverVerifyEmail/:email", UserController.verifyEmail);
 router.get("/RecoverVerifyOTP/:email/:otp", UserController.verifyOTP);
