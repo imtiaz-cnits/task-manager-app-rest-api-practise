@@ -10,6 +10,5 @@ module.exports = (req, res, next) => {
             req.headers.email = email;
             next();
         }
-    })
-
+    });
 }

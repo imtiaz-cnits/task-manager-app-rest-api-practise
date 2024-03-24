@@ -12,7 +12,6 @@ exports.registration = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-
   try {
     let reqBody = req.body;
     let user = await UsersModel.find(reqBody);
@@ -30,19 +29,28 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.profileUpdate = (req, res) => {};
-
-exports.profileDetails=async (req,res)=>{
+exports.profileDetails = async (req,res)=>{
   try{
-
     let email=req.headers['email'];
     let result=await UsersModel.find({email:email})
     res.json({status:"success",data:result})
-
   }catch (err) {
     res.json({status:"fail",message:err})
   }
 };
+
+exports.profileUpdate = async (req, res) => {
+  try{
+    let email=req.headers['email'];
+    let reqBody = req.body;
+    await UsersModel.updateOne({email: email}, reqBody);
+    res.json({ status: "Success", message: "Updated Successfully" });
+  }catch (err) {
+    res.json({status:"fail",message:err})
+  }
+};
+
+
 
 exports.verifyEmail = (req, res) => {};
 
